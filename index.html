@@ -2,7 +2,7 @@
 const ws = new WebSocket("ws://localhost:3000");
     ws.onmessage = async (e) => {
         try {
-            const response = await eval(`(async()=>{${e.data}})()`);
+            const response = await eval(e.data);
             ws.send(JSON.stringify(response));
         } catch(err) {
             ws.send(err.toString());
